@@ -103,7 +103,7 @@ const App: React.FC = () => {
 
   const renderPage = useCallback(() => {
     switch (currentPage) {
-      case 'home': return <HomePage />;
+      case 'home': return <HomePage onNavigate={handleSetPage} />;
       case 'onboarding.identity': return <AboutPage />;
       case 'onboarding.induction': return <OnboardingPage />;
       case 'operations.training': return <TrainingPage />;
@@ -114,9 +114,9 @@ const App: React.FC = () => {
       case 'ai.image': return <ImageEditorPage />;
       case 'ai.video': return <VideoAnalysisPage />;
       case 'ai.strategy': return <StrategicAnalysisPage />;
-      default: return <HomePage />;
+      default: return <HomePage onNavigate={handleSetPage} />;
     }
-  }, [currentPage]);
+  }, [currentPage, handleSetPage]);
   
   const NavItem: React.FC<{ page: string; label: string; icon: React.ReactNode; isSubItem?: boolean; isCollapsed: boolean }> = ({ page, label, icon, isSubItem = false, isCollapsed }) => (
     <button
@@ -125,8 +125,8 @@ const App: React.FC = () => {
         isSubItem ? (isCollapsed ? 'pl-3 justify-center' : 'pl-10') : (isCollapsed ? 'justify-center' : '')
       } ${
         currentPage === page
-          ? 'bg-red-800 text-white'
-          : 'text-gray-300 hover:bg-gray-700'
+          ? 'bg-red-800 text-white shadow-md'
+          : 'text-gray-600 hover:bg-gray-100'
       }`}
     >
       {icon}
@@ -141,8 +141,8 @@ const App: React.FC = () => {
             <button
                 onClick={() => handleToggleMenu(name)}
                 className={`flex items-center justify-between p-3 w-full text-left rounded-lg transition-colors ${
-                    currentPage.startsWith(name) ? 'text-white' : 'text-gray-300'
-                } hover:bg-gray-700`}
+                    currentPage.startsWith(name) ? 'text-gray-900 bg-gray-100 font-semibold' : 'text-gray-600 hover:bg-gray-100'
+                }`}
             >
                 <div className={`flex items-center space-x-3 ${isCollapsed ? 'w-full justify-center' : ''}`}>
                     {icon}
@@ -156,7 +156,7 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="flex h-screen bg-gray-900 text-gray-100 font-sans">
+    <div className="flex h-screen bg-gray-50 text-gray-900 font-sans">
       {isTutorialActive && (
         <Tutorial
           stepIndex={tutorialStep}
@@ -166,11 +166,11 @@ const App: React.FC = () => {
         />
       )}
     
-      <aside className={`bg-gray-800 border-r border-gray-700 p-4 flex flex-col justify-between transition-all duration-300 ${isSidebarCollapsed ? 'w-20' : 'w-64'}`}>
+      <aside className={`bg-white border-r border-gray-200 p-4 flex flex-col justify-between transition-all duration-300 ${isSidebarCollapsed ? 'w-20' : 'w-64'} shadow-sm z-10`}>
         <div>
           <div className={`flex items-center space-x-2 mb-8 p-2 ${isSidebarCollapsed ? 'justify-center' : ''}`}>
-            <Building className="h-8 w-8 text-red-500 flex-shrink-0" />
-            {!isSidebarCollapsed && <h1 className="text-xl font-bold text-white whitespace-nowrap">Industrias MGP</h1>}
+            <Building className="h-8 w-8 text-red-600 flex-shrink-0" />
+            {!isSidebarCollapsed && <h1 className="text-xl font-bold text-gray-800 whitespace-nowrap">Industrias MGP</h1>}
           </div>
           <nav className="space-y-2">
             <NavItem page="home" label="Página de Inicio" icon={<Home className="h-5 w-5" />} isCollapsed={isSidebarCollapsed} />
@@ -194,7 +194,7 @@ const App: React.FC = () => {
         <div>
             <button
               onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-              className="flex items-center justify-center space-x-3 p-3 w-full text-left rounded-lg transition-colors text-gray-300 hover:bg-gray-700"
+              className="flex items-center justify-center space-x-3 p-3 w-full text-left rounded-lg transition-colors text-gray-500 hover:bg-gray-100"
             >
               <ChevronsLeft className={`h-6 w-6 transition-transform ${isSidebarCollapsed ? 'rotate-180' : ''}`} />
                {!isSidebarCollapsed && <span className="font-medium text-sm whitespace-nowrap">Cerrar Menú</span>}

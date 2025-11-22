@@ -35,12 +35,12 @@ const StrategicAnalysis: React.FC = () => {
     }, [query, isThinkingMode, ai.models]);
 
     return (
-        <div className="bg-gray-900/50 p-8 rounded-xl border border-gray-700">
-            <h3 className="text-2xl font-bold text-white mb-2 flex items-center">
-                <BrainCircuit className="h-7 w-7 text-red-500 mr-3" />
+        <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-md">
+            <h3 className="text-2xl font-bold text-gray-900 mb-2 flex items-center">
+                <BrainCircuit className="h-7 w-7 text-red-600 mr-3" />
                 Análisis Estratégico con IA
             </h3>
-            <p className="text-gray-400 mb-6">
+            <p className="text-gray-600 mb-6">
                 Plantea un problema complejo o una pregunta estratégica. Activa el "Modo Pensamiento" para un análisis más profundo.
             </p>
             
@@ -49,17 +49,17 @@ const StrategicAnalysis: React.FC = () => {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Ej: 'Analiza nuestros protocolos de seguridad actuales y sugiere tres mejoras basadas en datos...'"
-                    className="w-full h-32 p-4 border border-gray-600 rounded-lg bg-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500 resize-none"
+                    className="w-full h-32 p-4 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-500 resize-none"
                     disabled={isLoading}
                 />
                 <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-                     <div className="flex items-center space-x-2 text-sm font-medium text-gray-300">
+                     <div className="flex items-center space-x-2 text-sm font-medium text-gray-700">
                         <label htmlFor="thinking-mode">Modo Pensamiento (Análisis Profundo):</label>
                         <button onClick={() => setIsThinkingMode(!isThinkingMode)} className="focus:outline-none">
                             {isThinkingMode ? <ToggleRight className="h-8 w-8 text-red-600" /> : <ToggleLeft className="h-8 w-8 text-gray-400" />}
                         </button>
                     </div>
-                    <button onClick={handleAnalysis} disabled={isLoading || !query} className="w-full sm:w-auto flex items-center justify-center gap-2 bg-red-800 text-white font-semibold px-6 py-3 rounded-lg hover:bg-red-900 disabled:bg-gray-500 transition-colors">
+                    <button onClick={handleAnalysis} disabled={isLoading || !query} className="w-full sm:w-auto flex items-center justify-center gap-2 bg-red-800 text-white font-semibold px-6 py-3 rounded-lg hover:bg-red-900 disabled:bg-gray-300 transition-colors">
                         {isLoading ? <RefreshCw className="h-5 w-5 animate-spin" /> : <Sparkles className="h-5 w-5" />}
                         <span>{isLoading ? 'Analizando...' : 'Generar Análisis'}</span>
                     </button>
@@ -69,9 +69,9 @@ const StrategicAnalysis: React.FC = () => {
             {error && <p className="mt-4 text-red-500 text-center">{error}</p>}
             
             {result && (
-                <div className="mt-6 p-6 bg-gray-700 rounded-lg">
-                    <h4 className="font-bold text-lg text-white mb-2">Análisis Generado:</h4>
-                    <p className="text-gray-200 whitespace-pre-wrap">{result}</p>
+                <div className="mt-6 p-6 bg-gray-50 border border-gray-200 rounded-lg">
+                    <h4 className="font-bold text-lg text-gray-900 mb-2">Análisis Generado:</h4>
+                    <p className="text-gray-700 whitespace-pre-wrap">{result}</p>
                 </div>
             )}
         </div>

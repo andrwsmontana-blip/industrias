@@ -74,20 +74,20 @@ const ImageEditor: React.FC = () => {
   };
   
   return (
-    <div className="bg-gray-800 p-8 rounded-xl shadow-md">
-      <h2 className="text-3xl font-bold text-white mb-2 flex items-center">
-        <Sparkles className="h-8 w-8 text-red-400 mr-3" />
+    <div className="bg-white border border-gray-100 p-8 rounded-xl shadow-md">
+      <h2 className="text-3xl font-bold text-gray-900 mb-2 flex items-center">
+        <Sparkles className="h-8 w-8 text-red-500 mr-3" />
         Editor de Imágenes con IA
       </h2>
-      <p className="text-gray-400 mb-6">
+      <p className="text-gray-600 mb-6">
         Sube una foto de perfil o de equipo y usa la IA para hacer ediciones creativas.
       </p>
 
       {!originalImage ? (
-        <label className="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed border-gray-600 rounded-lg cursor-pointer bg-gray-700 hover:bg-gray-600 transition-colors">
+        <label className="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors">
           <UploadCloud className="h-12 w-12 text-gray-400 mb-2" />
-          <span className="font-semibold text-gray-300">Haz clic para subir una imagen</span>
-          <span className="text-sm text-gray-400">PNG, JPG, o WEBP</span>
+          <span className="font-semibold text-gray-700">Haz clic para subir una imagen</span>
+          <span className="text-sm text-gray-500">PNG, JPG, o WEBP</span>
           <input type="file" accept="image/png, image/jpeg, image/webp" className="hidden" onChange={handleImageUpload} />
         </label>
       ) : (
@@ -107,15 +107,15 @@ const ImageEditor: React.FC = () => {
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
                 placeholder="Ej: 'Añade un filtro retro' o 'Conviértelo en un dibujo animado'"
-                className="w-full pl-10 pr-4 py-3 border border-gray-600 rounded-lg bg-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-500"
               />
             </div>
             <div className="flex gap-2">
-              <button onClick={generateImage} disabled={isLoading || !prompt} className="flex-1 sm:flex-auto flex items-center justify-center gap-2 bg-red-800 text-white font-semibold px-6 py-3 rounded-lg hover:bg-red-900 disabled:bg-gray-500 disabled:cursor-not-allowed transition-colors">
+              <button onClick={generateImage} disabled={isLoading || !prompt} className="flex-1 sm:flex-auto flex items-center justify-center gap-2 bg-red-800 text-white font-semibold px-6 py-3 rounded-lg hover:bg-red-900 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
                 {isLoading ? <RefreshCw className="h-5 w-5 animate-spin" /> : <Wand2 className="h-5 w-5" />}
                 <span>Generar</span>
               </button>
-              <button onClick={reset} className="flex-1 sm:flex-auto flex items-center justify-center gap-2 bg-gray-600 text-gray-200 font-semibold px-4 py-3 rounded-lg hover:bg-gray-500 transition-colors">
+              <button onClick={reset} className="flex-1 sm:flex-auto flex items-center justify-center gap-2 bg-gray-200 text-gray-800 font-semibold px-4 py-3 rounded-lg hover:bg-gray-300 transition-colors">
                 <RefreshCw className="h-5 w-5" />
                 <span>Reset</span>
               </button>
@@ -129,8 +129,8 @@ const ImageEditor: React.FC = () => {
 
 const ImageDisplay: React.FC<{ title: string; imageSrc: string | null; isLoading?: boolean }> = ({ title, imageSrc, isLoading }) => (
     <div className="w-full">
-        <h3 className="font-semibold mb-2 text-center text-gray-300">{title}</h3>
-        <div className="aspect-square w-full bg-gray-700 rounded-lg flex items-center justify-center overflow-hidden">
+        <h3 className="font-semibold mb-2 text-center text-gray-700">{title}</h3>
+        <div className="aspect-square w-full bg-gray-100 border border-gray-200 rounded-lg flex items-center justify-center overflow-hidden">
             {isLoading ? (
                 <div className="flex flex-col items-center text-gray-500">
                     <RefreshCw className="h-10 w-10 animate-spin mb-2" />

@@ -1,7 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { GoogleGenAI } from '@google/genai';
 import { UploadCloud, Film, Lightbulb, RefreshCw, FileText } from 'lucide-react';
-import { fileToBase64 } from '../utils/helpers';
 
 const FRAME_EXTRACTION_RATE_MS = 1000; // 1 frame per second
 
@@ -91,19 +90,19 @@ const VideoAnalysis: React.FC = () => {
   }, [videoFile, prompt, ai.models]);
 
   return (
-    <div className="bg-gray-900/50 p-8 rounded-xl border border-gray-700">
-      <h3 className="text-2xl font-bold text-white mb-2 flex items-center">
-        <FileText className="h-7 w-7 text-red-500 mr-3" />
+    <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-md">
+      <h3 className="text-2xl font-bold text-gray-900 mb-2 flex items-center">
+        <FileText className="h-7 w-7 text-red-600 mr-3" />
         Análisis de Video con IA
       </h3>
-      <p className="text-gray-400 mb-6">
+      <p className="text-gray-600 mb-6">
         Sube un video de capacitación o de un proceso y obtén un resumen e ideas clave.
       </p>
 
       {!videoSrc ? (
-        <label className="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-gray-600 rounded-lg cursor-pointer bg-gray-700 hover:bg-gray-600">
+        <label className="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors">
           <UploadCloud className="h-10 w-10 text-gray-400 mb-2" />
-          <span className="font-semibold text-gray-300">Sube un video</span>
+          <span className="font-semibold text-gray-700">Sube un video</span>
           <input type="file" accept="video/*" className="hidden" onChange={handleFileChange} />
         </label>
       ) : (
@@ -119,10 +118,10 @@ const VideoAnalysis: React.FC = () => {
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               placeholder="¿Qué quieres saber del video?"
-              className="w-full pl-10 pr-4 py-3 border border-gray-600 rounded-lg bg-gray-700"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-500"
             />
           </div>
-          <button onClick={analyzeVideo} disabled={isLoading} className="w-full flex items-center justify-center gap-2 bg-red-800 text-white font-semibold px-6 py-3 rounded-lg hover:bg-red-900 disabled:bg-gray-500">
+          <button onClick={analyzeVideo} disabled={isLoading} className="w-full flex items-center justify-center gap-2 bg-red-800 text-white font-semibold px-6 py-3 rounded-lg hover:bg-red-900 disabled:bg-gray-300 transition-colors">
             {isLoading ? <RefreshCw className="h-5 w-5 animate-spin" /> : <Film className="h-5 w-5" />}
             <span>{isLoading ? 'Analizando...' : 'Analizar Video'}</span>
           </button>
@@ -132,9 +131,9 @@ const VideoAnalysis: React.FC = () => {
       {error && <p className="mt-4 text-red-500 text-center">{error}</p>}
 
       {analysisResult && (
-        <div className="mt-6 p-6 bg-gray-700 rounded-lg">
-          <h4 className="font-bold text-lg text-white mb-2">Resultados del Análisis:</h4>
-          <p className="text-gray-200 whitespace-pre-wrap">{analysisResult}</p>
+        <div className="mt-6 p-6 bg-gray-50 border border-gray-200 rounded-lg">
+          <h4 className="font-bold text-lg text-gray-900 mb-2">Resultados del Análisis:</h4>
+          <p className="text-gray-700 whitespace-pre-wrap">{analysisResult}</p>
         </div>
       )}
     </div>

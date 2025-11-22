@@ -58,10 +58,10 @@ const Tutorial: React.FC<TutorialProps> = ({ stepIndex, onNext, onPrev, onClose 
   if (!step) return null;
 
   const arrowClasses: { [key: string]: string } = {
-    top: 'absolute left-1/2 -translate-x-1/2 -top-2 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-b-8 border-b-gray-800',
-    bottom: 'absolute left-1/2 -translate-x-1/2 -bottom-2 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-gray-800',
-    left: 'absolute top-1/2 -translate-y-1/2 -left-2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-r-gray-800',
-    right: 'absolute top-1/2 -translate-y-1/2 -right-2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-l-gray-800',
+    top: 'absolute left-1/2 -translate-x-1/2 -top-2 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-b-8 border-b-white',
+    bottom: 'absolute left-1/2 -translate-x-1/2 -bottom-2 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-white',
+    left: 'absolute top-1/2 -translate-y-1/2 -left-2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-r-white',
+    right: 'absolute top-1/2 -translate-y-1/2 -right-2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-l-white',
   };
 
   return (
@@ -69,23 +69,23 @@ const Tutorial: React.FC<TutorialProps> = ({ stepIndex, onNext, onPrev, onClose 
       <div className="fixed inset-0 bg-black/60 z-50 backdrop-blur-sm" />
       <div
         style={step.positioning}
-        className="fixed w-80 bg-gray-800 rounded-lg shadow-2xl p-6 z-50 animate-fade-in"
+        className="fixed w-80 bg-white rounded-lg shadow-2xl p-6 z-50 animate-fade-in text-gray-900 border border-gray-200"
       >
         {step.arrow && <div className={arrowClasses[step.arrow]} />}
-        <button onClick={onClose} className="absolute top-3 right-3 p-1 text-gray-500 hover:text-gray-200">
+        <button onClick={onClose} className="absolute top-3 right-3 p-1 text-gray-400 hover:text-gray-600">
           <X size={20} />
         </button>
 
-        <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
-        <p className="text-sm text-gray-300 mb-4">{step.content}</p>
+        <h3 className="text-lg font-bold text-gray-900 mb-2">{step.title}</h3>
+        <p className="text-sm text-gray-600 mb-4">{step.content}</p>
 
         <div className="flex justify-between items-center">
-          <span className="text-xs font-medium text-gray-400">
+          <span className="text-xs font-medium text-gray-500">
             {stepIndex + 1} / {TUTORIAL_STEPS.length}
           </span>
           <div className="flex gap-2">
             {stepIndex > 0 && (
-              <button onClick={onPrev} className="p-2 rounded-md hover:bg-gray-700">
+              <button onClick={onPrev} className="p-2 rounded-md hover:bg-gray-100 text-gray-600">
                 <ArrowLeft size={18} />
               </button>
             )}
